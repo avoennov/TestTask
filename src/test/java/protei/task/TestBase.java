@@ -17,7 +17,7 @@ public class TestBase {
     public static WebDriver driver;
     public WebDriverWait wait;
     public String url = "http://localhost:8000/qa-test.html";
-    private final Browser browser = Browser.CHROME;  //Так же можно указать FIREFOX or EDGE для запуска в соответствующем браузере
+    private final Browser browser = Browser.FIREFOX;  //Так же можно указать FIREFOX or EDGE для запуска в соответствующем браузере
 
     @BeforeMethod(alwaysRun = true)
     public void start () {
