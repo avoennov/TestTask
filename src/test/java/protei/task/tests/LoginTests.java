@@ -10,8 +10,7 @@ public class LoginTests extends TestBase {
 
     @Test
     public void testSuccessLogin() {
-        LoginHelper.login(url, "test@protei.ru", "test");
-        Assert.assertTrue(driver.findElement(By.id("inputsPage")).isDisplayed());
+        login();
     }
 
     @Test
