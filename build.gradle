@@ -1,16 +1,27 @@
 apply plugin: 'java'
 
+configurations {
+    agent
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.testng:testng:7.12.0'
+    //implementation 'org.testng:testng:7.12.0'
+    implementation 'org.testng:testng:6.14.3'
     implementation 'org.seleniumhq.selenium:selenium-java:4.44.0'
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    implementation 'ch.qos.logback:logback-classic:1.5.32'
+    implementation 'io.qameta.allure:allure-testng:2.34.0'
+    agent 'org.aspectj:aspectjweaver:1.9.25.1'
+
 }
 
 test {
     useTestNG()
+    jvmArgs "-javaagent:${configurations.agent.singleFile}" // Агент служит для обработки аннотаций, в т.ч. @Attachment
 }
 
 compileJava.options.encoding = 'UTF-8'
