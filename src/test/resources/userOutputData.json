@@ -1,0 +1,23 @@
+[
+  {
+    "email": "peter@mail.com",
+    "name": "Петр",
+    "gender": "Мужской",
+    "checkbox": "1.1",
+    "radioBtn": "2.1"
+  },
+  {
+    "email": "vasiliy@mail.com",
+    "name": "Василий",
+    "gender": "Мужской",
+    "checkbox": "1.1",
+    "radioBtn": "2.2"
+  },
+  {
+    "email": "svetlana@mail.com",
+    "name": "Светлана",
+    "gender": "Женский",
+    "checkbox": "1.2",
+    "radioBtn": "2.3"
+  }
+]

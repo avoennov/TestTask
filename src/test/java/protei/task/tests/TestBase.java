@@ -15,9 +15,6 @@ public class TestBase {
 
     protected final ApplicationManager app = new ApplicationManager();
 
-    //public static final Logger logger = LoggerFactory.getLogger(TestBase.class);
-
-
     @BeforeClass
     public void setUp(ITestContext context) throws Exception {
         app.init();
