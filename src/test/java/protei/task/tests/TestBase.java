@@ -18,13 +18,13 @@ public class TestBase {
     //public static final Logger logger = LoggerFactory.getLogger(TestBase.class);
 
 
-    @BeforeSuite
+    @BeforeClass
     public void setUp(ITestContext context) throws Exception {
         app.init();
         context.setAttribute("app", app);
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         app.stop();
     }
