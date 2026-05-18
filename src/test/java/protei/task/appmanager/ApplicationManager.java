@@ -11,7 +11,8 @@ import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ApplicationManager {
 

@@ -30,8 +30,7 @@ public class TestBase {
     }
 
     @BeforeMethod
-    public void logTestStart(Method m, Object[] p) {
-        //logger.info("Начало теста " + m.getName() + " with parameters " + Arrays.asList(p));
+    public void logTestStart(Method m) {
         logger.info("======[Начало теста " + m.getName() + "]======");
     }
 

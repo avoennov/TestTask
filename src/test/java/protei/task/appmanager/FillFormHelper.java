@@ -26,16 +26,20 @@ public class FillFormHelper extends HelperBase {
     @Step("Нажатие кнопки 'Добавить'")
     public void clickSubmitBtn() {
         click(By.id("dataSend"));
+        logger.info("Нажата кнопка 'Добавить'");
     }
 
     @Step("Нажатие на радиокнопку/кнопки")
     public void selectRadioBtn(String rbtnValue) throws InvalidNameException {
         if (Objects.equals(rbtnValue, "Вариант 2.1")) {
             click(By.id("dataSelect21"));
+            logger.info("Нажата радиокнопка '{}'", rbtnValue);
         } else if (Objects.equals(rbtnValue, "Вариант 2.2")) {
             click(By.id("dataSelect22"));
+            logger.info("Нажата радиокнопка '{}'", rbtnValue);
         } else if (Objects.equals(rbtnValue, "Вариант 2.3")) {
             click(By.id("dataSelect23"));
+            logger.info("Нажата радиокнопка '{}'", rbtnValue);
         } else {
             throw new InvalidNameException("Указано неправильное имя радиокнопки");
         }
@@ -45,8 +49,10 @@ public class FillFormHelper extends HelperBase {
     public void selectCheckbox(String chbValue) throws InvalidNameException {
         if (Objects.equals(chbValue, "Вариант 1.1")) {
             click(By.id("dataCheck11"));
+            logger.info("Выбран чекбокс '{}'", chbValue);
         } else if (Objects.equals(chbValue, "Вариант 1.2")) {
             click(By.id("dataCheck12"));
+            logger.info("Выбран чекбокс '{}'", chbValue);
         } else {
             throw new InvalidNameException("Указано неправильное имя чекбоска");
         }
@@ -56,17 +62,20 @@ public class FillFormHelper extends HelperBase {
     public void selectGender(String gender) {
         click(By.id("dataGender"));
         new Select(driver.findElement(By.id("dataGender"))).selectByVisibleText(gender);
+        logger.info("Выбран пол '{}'", gender);
     }
 
 
     @Step("Ввод имени")
     public void typeName(String name) {
         type(By.id("dataName"), name);
+        logger.info("Введено имя '{}'", name);
     }
 
     @Step("Ввод email")
     public void typeEmail(String email) {
         type(By.id("dataEmail"), email);
+        logger.info("Введён email '{}'", email);
     }
 
 
@@ -96,6 +105,8 @@ public class FillFormHelper extends HelperBase {
 
     // Сравниваем таблицы через TestNG
         Assert.assertEquals(actualTableData, expectedTableData, "Данные в таблице не соответствуют ожидаемым!");
+        logger.info("Актуальные данные таблицы:\n{}", actualTableData);
+        logger.info("Ожидаемые данные таблицы:\n{}", expectedTableData);
 }
 
     // Метод для парсинга таблицы
@@ -126,6 +137,17 @@ public class FillFormHelper extends HelperBase {
         return tableData;
     }
 
+    @Step("Проверка что таблица пуста")
+    public void checkWhatTableDataIsEmpty(){
+        Assert.assertTrue(driver.findElements(By.xpath("//tbody//tr")).isEmpty());
+        logger.info("Таблица не содержит данных");
+    }
+
+    @Step("Проверка что сообщение присутствует")
+    public void checkMessageInInputPagePresent(String message){
+        Assert.assertTrue(driver.findElement(By.xpath("//*[text()='" + message + "']")).isDisplayed());
+        logger.info("Сообщение '" + message + "' присутствует");
+    }
 
     @Step("Нажатие кнопки OK в диалоговом окне \"Данные добавлены\"")
     public void clickOkBtnModaldlg() {
