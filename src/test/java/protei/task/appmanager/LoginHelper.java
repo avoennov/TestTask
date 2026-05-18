@@ -21,9 +21,22 @@ public class LoginHelper extends HelperBase {
         logger.info("Аутентификация выполняется с email: '" + email +"' и паролем: '" + password + "'");
     }
 
-    public void login() {
+    public void successLogin() {
         LoginHelper.login(url, "test@protei.ru", "test");
         Assert.assertTrue(driver.findElement(By.id("inputsPage")).isDisplayed());
         logger.info("Аутентификация выполнена успешно");
     }
+
+    @Step
+    public void checkWhatInputPagePresent() {
+        Assert.assertTrue(driver.findElement(By.id("inputsPage")).isDisplayed());
+        logger.info("Страница 'inputsPage' присутствует");
+    }
+
+    @Step("Проверка что сообщение присутствует")
+    public void checkMessageInLoginPagePresent(String message){
+        Assert.assertTrue(driver.findElement(By.xpath("//*[text()='" + message + "']")).isDisplayed());
+        logger.info("Сообщение '" + message + "' присутствует");
+    }
+
 }

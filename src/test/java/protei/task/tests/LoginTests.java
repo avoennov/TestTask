@@ -1,8 +1,6 @@
 package protei.task.tests;
 
 import io.qameta.allure.*;
-import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import protei.task.appmanager.LoginHelper;
 
@@ -18,7 +16,7 @@ public class LoginTests extends TestBase {
     @Owner("Военнов Алексей")
 
     public void testSuccessLogin() {
-        app.getLoginHelper().login();
+        app.getLoginHelper().successLogin();
     }
 
     @Test
@@ -28,7 +26,7 @@ public class LoginTests extends TestBase {
 
     public void testWrongEmailFormat() {
         LoginHelper.login(app.getLoginHelper().url, "123", "test");
-        Assert.assertTrue(app.getFillFormHelper().driver.findElement(By.id("emailFormatError")).isDisplayed());
+        app.getLoginHelper().checkMessageInLoginPagePresent("Неверный формат E-Mail");
         logger.info("Аутентификация не выполнена. Указанный email имеет неправильный формат");
     }
 
@@ -39,8 +37,22 @@ public class LoginTests extends TestBase {
 
     public void testWrongEmailAndPassword() {
         LoginHelper.login(app.getLoginHelper().url, "123@protei.ru", "123");
-        Assert.assertTrue(app.getFillFormHelper().driver.findElement(By.id("invalidEmailPassword")).isDisplayed());
+        app.getLoginHelper().checkMessageInLoginPagePresent("Неверный E-Mail или пароль");
         logger.info("Аутентификация не выполнена. Указанный email или пароль неверны");
+    }
+
+    @Test
+    @Description("Успешный вход после неуспешного")
+    @Link(name = "Документация", url = "https://example.com")
+    @Owner("Военнов Алексей")
+
+    public void testSuccesLoginAfterFail() {
+        LoginHelper.login(app.getLoginHelper().url, "", "");
+        app.getLoginHelper().checkMessageInLoginPagePresent("Неверный формат E-Mail");
+        logger.info("Аутентификация не выполнена. Указанный email имеет неправильный формат");
+        LoginHelper.login(app.getLoginHelper().url, "test@protei.ru", "test");
+        app.getLoginHelper().checkWhatInputPagePresent();
+        logger.info("Аутентификация выполнена успешно");
     }
 
 }

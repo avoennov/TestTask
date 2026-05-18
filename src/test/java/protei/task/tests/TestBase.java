@@ -18,20 +18,19 @@ public class TestBase {
     //public static final Logger logger = LoggerFactory.getLogger(TestBase.class);
 
 
-    @BeforeSuite
+    @BeforeClass
     public void setUp(ITestContext context) throws Exception {
         app.init();
         context.setAttribute("app", app);
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         app.stop();
     }
 
     @BeforeMethod
-    public void logTestStart(Method m, Object[] p) {
-        //logger.info("Начало теста " + m.getName() + " with parameters " + Arrays.asList(p));
+    public void logTestStart(Method m) {
         logger.info("======[Начало теста " + m.getName() + "]======");
     }
 
